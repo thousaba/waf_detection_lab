@@ -1,0 +1,15 @@
+2026-08-21 17:57:16,492 event=login_success user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,616 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-21 17:57:16,645 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=2 src_ip=10.248.52.192
+2026-08-21 17:57:16,668 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=15 src_ip=10.248.52.192
+2026-08-21 17:57:16,692 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=40 src_ip=10.248.52.192
+2026-08-21 17:57:16,751 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,773 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,796 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,825 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,853 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,874 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,893 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,919 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,941 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-21 17:57:16,970 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
