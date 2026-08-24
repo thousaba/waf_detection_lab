@@ -13,3 +13,169 @@
 2026-08-21 17:57:16,919 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
 2026-08-21 17:57:16,941 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
 2026-08-21 17:57:16,970 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:38,506 event=login_success user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:38,705 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:29:38,724 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:29:38,779 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:29:38,798 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:29:38,859 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:29:38,878 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:29:38,895 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:29:38,913 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=2 src_ip=10.248.52.192
+2026-08-24 12:29:38,938 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=15 src_ip=10.248.52.192
+2026-08-24 12:29:38,968 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=40 src_ip=10.248.52.192
+2026-08-24 12:29:38,992 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,018 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,041 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,072 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,104 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,129 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,164 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,192 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,232 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:29:39,255 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:03,810 event=login_success user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:03,934 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:35:03,967 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=2 src_ip=10.248.52.192
+2026-08-24 12:35:03,993 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=15 src_ip=10.248.52.192
+2026-08-24 12:35:04,024 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=40 src_ip=10.248.52.192
+2026-08-24 12:35:04,080 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,113 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,146 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,184 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,214 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,244 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,276 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,311 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,355 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:35:04,386 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:28,771 event=login_success user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:28,877 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:47:28,903 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=2 src_ip=10.248.52.192
+2026-08-24 12:47:28,941 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=15 src_ip=10.248.52.192
+2026-08-24 12:47:28,978 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=40 src_ip=10.248.52.192
+2026-08-24 12:47:29,018 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,040 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,073 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,109 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,141 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,173 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,203 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,235 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,260 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:47:29,288 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="python-requests/2.34.2"
+2026-08-24 12:52:29,768 event=login_failure user="analyst!1" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"
+2026-08-24 12:53:09,074 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"
+2026-08-24 12:53:55,483 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 12:53:55,630 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=x src_ip=10.248.52.192
+2026-08-24 12:53:58,118 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=x src_ip=10.248.52.192
+2026-08-24 12:54:06,810 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=x src_ip=10.248.52.192
+2026-08-24 12:54:12,534 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=2 src_ip=10.248.52.192
+2026-08-24 12:54:18,020 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=2+1 src_ip=10.248.52.192
+2026-08-24 12:57:14,168 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=5 src_ip=10.248.52.192
+2026-08-24 12:57:30,251 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 13:00:14,707 event=login_failure user="analyst" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 13:02:18,550 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 13:03:25,130 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 13:12:01,502 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=7 src_ip=10.248.52.192
+2026-08-24 13:12:05,178 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=14 src_ip=10.248.52.192
+2026-08-24 13:12:08,991 event=employee_record_access viewer_user="analyst" viewer_role="employee" target_employee_id=99 src_ip=10.248.52.192
+2026-08-24 13:14:10,569 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0"
+2026-08-24 13:14:17,078 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=3 src_ip=10.248.52.192
+2026-08-24 13:14:21,741 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=6 src_ip=10.248.52.192
+2026-08-24 13:14:33,536 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 13:15:56,359 event=login_success user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 13:15:56,417 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 13:48:57,567 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 13:49:31,122 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 13:49:39,686 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 13:49:46,645 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 13:52:32,736 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 14:17:13,521 event=login_failure user="analyst" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+2026-08-24 14:17:27,259 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+2026-08-24 14:17:36,005 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 14:18:07,368 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 14:18:20,394 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=1 src_ip=10.248.52.192
+2026-08-24 14:18:28,463 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=15 src_ip=10.248.52.192
+2026-08-24 14:27:22,474 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=3 src_ip=10.248.52.192
+2026-08-24 14:28:04,968 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=5 src_ip=10.248.52.192
+2026-08-24 14:28:15,275 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=9 src_ip=10.248.52.192
+2026-08-24 14:30:12,448 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 14:30:13,915 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 14:37:12,814 event=employee_record_access viewer_user="attacker" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 14:44:57,212 event=employee_record_access viewer_user="attacker" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 15:01:10,585 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+2026-08-24 15:01:21,507 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=2 src_ip=10.248.52.192
+2026-08-24 15:07:07,640 event=login_success user="admin" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+2026-08-24 15:08:27,592 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 15:13:14,868 event=login_success user="admin" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+2026-08-24 15:15:00,535 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 15:15:37,018 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 15:15:58,707 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 15:16:16,745 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 15:16:32,184 event=employee_record_access viewer_user="admin" viewer_role="admin" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 15:18:27,083 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+2026-08-24 15:20:05,789 event=access_denied reason="idor_write_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=10 src_ip=10.248.52.192
+2026-08-24 16:17:10,856 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+2026-08-24 16:19:41,035 event=login_failure user="analyst" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:20:12,428 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:24:44,716 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:24:44,809 event=access_denied reason="api_directory_scrape_attempt" viewer_user="analyst" viewer_role="employee" src_ip=10.248.52.192
+2026-08-24 16:25:21,669 event=login_success user="analyst" src_ip=10.248.52.192 user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+2026-08-24 16:25:37,817 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=2 src_ip=10.248.52.192
+2026-08-24 16:25:43,339 event=access_denied reason="idor_attempt" viewer_user="analyst" viewer_role="employee" target_employee_id=13 src_ip=10.248.52.192
+2026-08-24 16:27:18,450 event=login_success user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:27:18,494 event=api_directory_access viewer_user="admin" viewer_role="admin" record_count=40 src_ip=10.248.52.192
+2026-08-24 16:41:43,153 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,224 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,271 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,310 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,387 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,426 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,515 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,585 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,631 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:41:43,688 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,387 event=login_failure user="admin" src_ip=203.0.113.1 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,473 event=login_failure user="admin" src_ip=203.0.113.2 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,536 event=login_failure user="admin" src_ip=203.0.113.3 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,592 event=login_failure user="admin" src_ip=203.0.113.4 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,642 event=login_failure user="admin" src_ip=203.0.113.5 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,699 event=login_failure user="admin" src_ip=203.0.113.6 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,767 event=login_failure user="admin" src_ip=203.0.113.7 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,861 event=login_failure user="admin" src_ip=203.0.113.8 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,916 event=login_failure user="admin" src_ip=203.0.113.9 user_agent="curl/8.20.0"
+2026-08-24 16:43:20,988 event=login_failure user="admin" src_ip=203.0.113.10 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,274 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,309 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,348 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,403 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,451 event=login_failure user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,451 event=account_locked reason="ip_threshold" src_ip=10.248.52.192 threshold=5 window_seconds=300 lockout_seconds=900
+2026-08-24 16:46:56,452 event=account_locked reason="username_threshold" user="admin" src_ip=10.248.52.192 threshold=5 window_seconds=300 lockout_seconds=900
+2026-08-24 16:46:56,480 event=login_blocked reason="rate_limited" user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,599 event=login_blocked reason="rate_limited" user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,632 event=login_blocked reason="rate_limited" user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,697 event=login_blocked reason="rate_limited" user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:46:56,723 event=login_blocked reason="rate_limited" user="admin" src_ip=10.248.52.192 user_agent="curl/8.20.0"
+2026-08-24 16:47:19,605 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.1 user_agent="curl/8.20.0"
+2026-08-24 16:47:19,630 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.2 user_agent="curl/8.20.0"
+2026-08-24 16:47:19,661 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.3 user_agent="curl/8.20.0"
+2026-08-24 16:47:19,705 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.4 user_agent="curl/8.20.0"
+2026-08-24 16:47:19,764 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.5 user_agent="curl/8.20.0"
+2026-08-24 16:47:19,817 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.6 user_agent="curl/8.20.0"
+2026-08-24 16:47:19,960 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.7 user_agent="curl/8.20.0"
+2026-08-24 16:47:19,990 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.8 user_agent="curl/8.20.0"
+2026-08-24 16:47:20,068 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.9 user_agent="curl/8.20.0"
+2026-08-24 16:47:20,133 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.10 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,368 event=login_failure user="admin" src_ip=203.0.113.1 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,417 event=login_failure user="admin" src_ip=203.0.113.2 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,568 event=login_failure user="admin" src_ip=203.0.113.3 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,641 event=login_failure user="admin" src_ip=203.0.113.4 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,699 event=login_failure user="admin" src_ip=203.0.113.5 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,700 event=account_locked reason="username_threshold" user="admin" src_ip=203.0.113.5 threshold=5 window_seconds=300 lockout_seconds=900
+2026-08-24 16:47:58,747 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.6 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,788 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.7 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,830 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.8 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,863 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.9 user_agent="curl/8.20.0"
+2026-08-24 16:47:58,898 event=login_blocked reason="rate_limited" user="admin" src_ip=203.0.113.10 user_agent="curl/8.20.0"
