@@ -7,11 +7,14 @@ from flask import Flask, request, g, session, redirect, url_for, render_template
 DB_PATH = os.path.join(os.path.dirname(__file__), "meridian.db")
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or os.urandom(32)
+
 auth_logger = logging.getLogger("meridian_security")
 auth_logger.setLevel(logging.INFO)
 _handler = logging.FileHandler(os.path.join(os.path.dirname(__file__), "meridian_security.log"))
 _handler.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
 auth_logger.addHandler(_handler)
+
+
 MAX_FAILURES = 5
 WINDOW_SECONDS = 300      # 5 minutes
 LOCKOUT_SECONDS = 900     # 15 minutes
@@ -82,6 +85,9 @@ def close_db(exception=None):
         db.close()
 
 
+# ---------------------------------------------------------------------
+# Templates (inline for a single-file lab app)
+# ---------------------------------------------------------------------
 
 LAYOUT = """
 <!DOCTYPE html>
@@ -122,6 +128,9 @@ def require_login():
     return session.get("user") is not None
 
 
+# ---------------------------------------------------------------------
+# Auth
+# ---------------------------------------------------------------------
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -197,6 +206,10 @@ def logout():
     return redirect(url_for("login"))
 
 
+# ---------------------------------------------------------------------
+# Dashboard
+# ---------------------------------------------------------------------
+
 @app.route("/")
 def dashboard():
     if not require_login():
@@ -213,6 +226,9 @@ def dashboard():
     return render(content)
 
 
+# ---------------------------------------------------------------------
+# Employees (list, search - SQLi target, detail - IDOR target, notes - XSS target)
+# ---------------------------------------------------------------------
 
 @app.route("/employees")
 def employees_list():
@@ -243,6 +259,12 @@ def employees_list():
 
 @app.route("/employees/search")
 def employees_search():
+    """
+    INTENTIONALLY VULNERABLE: raw string-formatted SQL query.
+    This exists so SQLi payloads against a lab WAF have a real
+    injectable sink to hit, instead of always being blocked before
+    reaching any application logic.
+    """
     if not require_login():
         return redirect(url_for("login"))
     q = request.args.get("q", "")
@@ -271,8 +293,56 @@ def employees_search():
     return render(content)
 
 
+DOCS_DIR = os.path.join(os.path.dirname(__file__), "documents")
+
+
+@app.route("/employees/<emp_id>/document")
+def employee_document(emp_id):
+    """
+    FIXED (was path traversal): filename now has its resolved
+    (realpath) location checked against DOCS_DIR's resolved root
+    before being opened. This closes BOTH relative traversal
+    (../../etc/passwd, which the WAF also blocks) AND the more
+    dangerous bypass that was actually found: an absolute path in
+    the `file` parameter, which os.path.join() happily returns
+    unchanged (discarding DOCS_DIR entirely per Python's own
+    documented join() semantics) and which contains no "../" for
+    ModSecurity's LFI signature to match. Confirmed via this bypass
+    that the app's own source code (app.py) and full database
+    (meridian.db, including plaintext user passwords) were both
+    directly readable this way, independent of the WAF layer.
+    """
+    if not require_login():
+        return redirect(url_for("login"))
+    filename = request.args.get("file", "contract.txt")
+    docs_root = os.path.realpath(DOCS_DIR)
+    requested_path = os.path.realpath(os.path.join(DOCS_DIR, filename))
+    if requested_path != docs_root and not requested_path.startswith(docs_root + os.sep):
+        auth_logger.info(
+            f'event=access_denied reason="path_traversal_attempt" viewer_user="{session.get("user")}" '
+            f'requested_file="{filename}" src_ip={client_ip()}'
+        )
+        return render("<div class='card'><p>403 - Invalid document path.</p></div>"), 403
+    try:
+        with open(requested_path, "r", errors="replace") as f:
+            content = f.read()
+    except Exception as e:
+        return render(f"<div class='card'><p>Could not read file: {e}</p></div>"), 404
+    return render(f"<div class='card'><h3>Document: {filename}</h3><pre>{content}</pre></div>")
+
+
+
 @app.route("/employees/<emp_id>")
 def employee_detail(emp_id):
+    """
+    FIXED (was IDOR): only admin/hr roles may view employee detail
+    records. Previously any authenticated user could view any
+    employee's record (including salary and internal reference
+    number) by simply changing the ID in the URL — confirmed via
+    Splunk detection (repeated employee_record_access events from a
+    single low-privilege user against multiple distinct IDs) and a
+    manual curl-based reproduction as the "analyst" user.
+    """
     if not require_login():
         return redirect(url_for("login"))
 
@@ -320,6 +390,18 @@ def employee_detail(emp_id):
 
 @app.route("/employees/<emp_id>/notes", methods=["POST"])
 def add_note(emp_id):
+    """
+    FIXED (was write-path IDOR): previously any authenticated user
+    could add a note to ANY employee's record regardless of role —
+    confirmed via Burp Suite as the "analyst" (employee-role) user,
+    who successfully injected a note into a record they can't even
+    view themselves post-fix. This is a distinct finding from the
+    read-path IDOR: combined with the stored-XSS sink this field
+    renders into, a write-path bypass lets a low-privilege attacker
+    target a payload at a record a HIGHER-privilege user (admin/hr)
+    is likely to view — widening the blast radius of the XSS rather
+    than confining it to the attacker's own record.
+    """
     if not require_login():
         return redirect(url_for("login"))
 
@@ -342,6 +424,10 @@ def add_note(emp_id):
     return redirect(url_for("employee_detail", emp_id=emp_id))
 
 
+# ---------------------------------------------------------------------
+# Customers
+# ---------------------------------------------------------------------
+
 @app.route("/customers")
 def customers_list():
     if not require_login():
@@ -362,8 +448,28 @@ def customers_list():
     return render(content)
 
 
+# ---------------------------------------------------------------------
+# Simple JSON API (a second, less HTML-noisy target for automated tools)
+# ---------------------------------------------------------------------
+
 @app.route("/api/employees")
 def api_employees():
+    """
+    FIXED (was missing authorization): this endpoint returned the
+    full employee directory (id, name, department) to any
+    authenticated user regardless of role. While it doesn't expose
+    salary/internal_ref the way /employees/<id> does, it hands an
+    attacker two things a slower, noisier approach would cost them:
+      1. A ready-made target list for spear phishing, pre-filtered
+         by department in one response.
+      2. A silent way to enumerate every valid employee ID without
+         the fuzzing noise (1..N requests hitting /employees/<id>)
+         that would otherwise show up as an obvious scanning pattern
+         in Splunk/WAF logs.
+    Restricted to the same admin/hr roles as the rest of the
+    employee-data endpoints, and access is now logged so unusually
+    frequent pulls of the full directory can be monitored for.
+    """
     if not require_login():
         return jsonify({"error": "unauthorized"}), 401
 
