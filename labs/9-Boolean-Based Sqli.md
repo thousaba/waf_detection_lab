@@ -1,4 +1,4 @@
-# SQL Injection, Part 4: Boolean-Based Blind — Extracting Data Without Ever Seeing It
+# SQL Injection, Part 5: Boolean-Based Blind — Extracting Data Without Ever Seeing It
 
 ## Why "Blind" SQLi Is a Different Threat Than It Sounds
 

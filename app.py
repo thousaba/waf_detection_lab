@@ -1,10 +1,17 @@
-import sqlite3
 import os
 import time
 import logging
+import psycopg2
+import psycopg2.extras
 from flask import Flask, request, g, session, redirect, url_for, render_template_string, jsonify
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "meridian.db")
+DB_CONFIG = {
+    "host": os.environ.get("MERIDIAN_DB_HOST", "127.0.0.1"),
+    "port": os.environ.get("MERIDIAN_DB_PORT", "5433"),
+    "dbname": os.environ.get("MERIDIAN_DB_NAME", "meridian"),
+    "user": os.environ.get("MERIDIAN_DB_USER", "meridian_app"),
+    "password": os.environ.get("MERIDIAN_DB_PASSWORD", "MeridianLab2026!"),
+}
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or os.urandom(32)
 
@@ -73,8 +80,7 @@ def clear_login_failures(ip, username):
 
 def get_db():
     if "db" not in g:
-        g.db = sqlite3.connect(DB_PATH)
-        g.db.row_factory = sqlite3.Row
+        g.db = psycopg2.connect(cursor_factory=psycopg2.extras.RealDictCursor, **DB_CONFIG)
     return g.db
 
 
@@ -83,6 +89,15 @@ def close_db(exception=None):
     db = g.pop("db", None)
     if db is not None:
         db.close()
+
+
+def db_exec(sql, params=None):
+    cur = get_db().cursor()
+    if params is None:
+        cur.execute(sql)
+    else:
+        cur.execute(sql, params)
+    return cur
 
 
 # ---------------------------------------------------------------------
@@ -154,10 +169,9 @@ def login():
             """
             return render(form), 429
 
-        db = get_db()
         # Intentionally simple/weak auth check for lab realism (brute force telemetry)
-        row = db.execute(
-            "SELECT * FROM users WHERE username = ? AND password = ?",
+        row = db_exec(
+            "SELECT * FROM users WHERE username = %s AND password = %s",
             (username, password),
         ).fetchone()
         if row:
@@ -214,9 +228,8 @@ def logout():
 def dashboard():
     if not require_login():
         return redirect(url_for("login"))
-    db = get_db()
-    emp_count = db.execute("SELECT COUNT(*) c FROM employees").fetchone()["c"]
-    cust_count = db.execute("SELECT COUNT(*) c FROM customers").fetchone()["c"]
+    emp_count = db_exec("SELECT COUNT(*) c FROM employees").fetchone()["c"]
+    cust_count = db_exec("SELECT COUNT(*) c FROM customers").fetchone()["c"]
     content = f"""
     <div class="card">
       <h2>Welcome, {session.get('user')}</h2>
@@ -234,8 +247,7 @@ def dashboard():
 def employees_list():
     if not require_login():
         return redirect(url_for("login"))
-    db = get_db()
-    rows = db.execute("SELECT id, name, department, email FROM employees").fetchall()
+    rows = db_exec("SELECT id, name, department, email FROM employees").fetchall()
     rows_html = "".join(
         f"<tr><td><a href='/employees/{r['id']}'>{r['id']}</a></td>"
         f"<td>{r['name']}</td><td>{r['department']}</td><td>{r['email']}</td></tr>"
@@ -268,12 +280,11 @@ def employees_search():
     if not require_login():
         return redirect(url_for("login"))
     q = request.args.get("q", "")
-    db = get_db()
     query = f"SELECT id, name, department, email FROM employees WHERE name LIKE '%{q}%'"
     try:
-        rows = db.execute(query).fetchall()
+        rows = db_exec(query).fetchall()
         error = None
-    except sqlite3.Error as e:
+    except psycopg2.Error as e:
         rows = []
         error = str(e)
     rows_html = "".join(
@@ -355,8 +366,10 @@ def employee_detail(emp_id):
         )
         return render("<div class='card'><p>403 - You do not have permission to view this record.</p></div>"), 403
 
-    db = get_db()
-    row = db.execute("SELECT * FROM employees WHERE id = ?", (emp_id,)).fetchone()
+    if not emp_id.isdigit():
+        return render("<div class='card'><p>Employee not found.</p></div>"), 404
+
+    row = db_exec("SELECT * FROM employees WHERE id = %s::int", (emp_id,)).fetchone()
     auth_logger.info(
         f'event=employee_record_access viewer_user="{session.get("user")}" '
         f'viewer_role="{session.get("role")}" target_employee_id={emp_id} '
@@ -364,8 +377,8 @@ def employee_detail(emp_id):
     )
     if not row:
         return render("<div class='card'><p>Employee not found.</p></div>"), 404
-    notes = db.execute(
-        "SELECT note FROM employee_notes WHERE employee_id = ?", (emp_id,)
+    notes = db_exec(
+        "SELECT note FROM employee_notes WHERE employee_id = %s::int", (emp_id,)
     ).fetchall()
     notes_html = "".join(f"<li>{n['note']}</li>" for n in notes)  # intentionally unescaped -> stored XSS sink
     content = f"""
@@ -414,13 +427,15 @@ def add_note(emp_id):
         )
         return render("<div class='card'><p>403 - You do not have permission to modify this record.</p></div>"), 403
 
+    if not emp_id.isdigit():
+        return render("<div class='card'><p>Employee not found.</p></div>"), 404
+
     note = request.form.get("note", "")
-    db = get_db()
-    db.execute(
-        "INSERT INTO employee_notes (employee_id, note) VALUES (?, ?)",
+    db_exec(
+        "INSERT INTO employee_notes (employee_id, note) VALUES (%s::int, %s)",
         (emp_id, note),
     )
-    db.commit()
+    get_db().commit()
     return redirect(url_for("employee_detail", emp_id=emp_id))
 
 
@@ -432,8 +447,7 @@ def add_note(emp_id):
 def customers_list():
     if not require_login():
         return redirect(url_for("login"))
-    db = get_db()
-    rows = db.execute("SELECT id, company_name, contact_email, plan FROM customers").fetchall()
+    rows = db_exec("SELECT id, company_name, contact_email, plan FROM customers").fetchall()
     rows_html = "".join(
         f"<tr><td>{r['id']}</td><td>{r['company_name']}</td><td>{r['contact_email']}</td><td>{r['plan']}</td></tr>"
         for r in rows
@@ -481,8 +495,7 @@ def api_employees():
         )
         return jsonify({"error": "forbidden"}), 403
 
-    db = get_db()
-    rows = db.execute("SELECT id, name, department FROM employees").fetchall()
+    rows = db_exec("SELECT id, name, department FROM employees").fetchall()
     auth_logger.info(
         f'event=api_directory_access viewer_user="{session.get("user")}" '
         f'viewer_role="{session.get("role")}" record_count={len(rows)} '
@@ -492,6 +505,8 @@ def api_employees():
 
 
 if __name__ == "__main__":
-    if not os.path.exists(DB_PATH):
-        print("Database not found. Run seed_data.py first: python3 seed_data.py")
+    try:
+        psycopg2.connect(**DB_CONFIG).close()
+    except psycopg2.OperationalError as e:
+        print(f"Could not reach the database ({e}). Run seed_data.py first: python3 seed_data.py")
     app.run(host="0.0.0.0", port=5000, debug=False)

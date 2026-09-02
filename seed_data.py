@@ -1,8 +1,14 @@
-import sqlite3
+import psycopg2
 import os
 import random
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "meridian.db")
+DB_CONFIG = {
+    "host": os.environ.get("MERIDIAN_DB_HOST", "127.0.0.1"),
+    "port": os.environ.get("MERIDIAN_DB_PORT", "5433"),
+    "dbname": os.environ.get("MERIDIAN_DB_NAME", "meridian"),
+    "user": os.environ.get("MERIDIAN_DB_USER", "meridian_app"),
+    "password": os.environ.get("MERIDIAN_DB_PASSWORD", "MeridianLab2026!"),
+}
 
 FIRST_NAMES = ["Alex", "Sam", "Jordan", "Taylor", "Morgan", "Casey", "Riley",
                "Jamie", "Cameron", "Drew", "Avery", "Reese", "Quinn", "Skyler"]
@@ -17,21 +23,22 @@ PLANS = ["Starter", "Professional", "Enterprise"]
 
 
 def create_schema(conn):
-    conn.executescript("""
-    DROP TABLE IF EXISTS users;
-    DROP TABLE IF EXISTS employees;
+    cur = conn.cursor()
+    cur.execute("""
     DROP TABLE IF EXISTS employee_notes;
+    DROP TABLE IF EXISTS employees;
     DROP TABLE IF EXISTS customers;
+    DROP TABLE IF EXISTS users;
 
     CREATE TABLE users (
-        id INTEGER PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         username TEXT UNIQUE,
         password TEXT,
         role TEXT
     );
 
     CREATE TABLE employees (
-        id INTEGER PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         name TEXT,
         department TEXT,
         email TEXT,
@@ -40,28 +47,31 @@ def create_schema(conn):
     );
 
     CREATE TABLE employee_notes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
         employee_id INTEGER,
         note TEXT
     );
 
     CREATE TABLE customers (
-        id INTEGER PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         company_name TEXT,
         contact_email TEXT,
         plan TEXT
     );
     """)
+    conn.commit()
 
 
 def seed(conn):
+    cur = conn.cursor()
+
     # Login users (weak/plaintext passwords are intentional for this lab)
-    conn.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-                 ("admin", "admin123", "admin"))
-    conn.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-                 ("hr_manager", "hrpass2026", "hr"))
-    conn.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
-                 ("analyst", "analyst!1", "employee"))
+    cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
+                ("admin", "admin123", "admin"))
+    cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
+                ("hr_manager", "hrpass2026", "hr"))
+    cur.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
+                ("analyst", "analyst!1", "employee"))
 
     # Employees
     for i in range(1, 41):
@@ -71,24 +81,24 @@ def seed(conn):
         email = f"{first.lower()}.{last.lower()}@meridiancorp.example"
         salary = random.randint(45000, 145000)
         internal_ref = f"MC-{random.randint(100000, 999999)}"  # fake internal ID, not a real SSN
-        conn.execute(
-            "INSERT INTO employees (name, department, email, salary, internal_ref) VALUES (?, ?, ?, ?, ?)",
+        cur.execute(
+            "INSERT INTO employees (name, department, email, salary, internal_ref) VALUES (%s, %s, %s, %s, %s)",
             (f"{first} {last}", dept, email, salary, internal_ref),
         )
 
     # A couple of seed notes
-    conn.execute("INSERT INTO employee_notes (employee_id, note) VALUES (?, ?)",
-                 (1, "Onboarded successfully, laptop issued."))
-    conn.execute("INSERT INTO employee_notes (employee_id, note) VALUES (?, ?)",
-                 (2, "Requested VPN access renewal."))
+    cur.execute("INSERT INTO employee_notes (employee_id, note) VALUES (%s, %s)",
+                (1, "Onboarded successfully, laptop issued."))
+    cur.execute("INSERT INTO employee_notes (employee_id, note) VALUES (%s, %s)",
+                (2, "Requested VPN access renewal."))
 
     # Customers
     for name in COMPANY_NAMES:
         slug = name.lower().replace(" ", "")
         contact_email = f"contact@{slug}.example"
         plan = random.choice(PLANS)
-        conn.execute(
-            "INSERT INTO customers (company_name, contact_email, plan) VALUES (?, ?, ?)",
+        cur.execute(
+            "INSERT INTO customers (company_name, contact_email, plan) VALUES (%s, %s, %s)",
             (name, contact_email, plan),
         )
 
@@ -96,11 +106,9 @@ def seed(conn):
 
 
 if __name__ == "__main__":
-    if os.path.exists(DB_PATH):
-        os.remove(DB_PATH)
-    conn = sqlite3.connect(DB_PATH)
+    conn = psycopg2.connect(**DB_CONFIG)
     create_schema(conn)
     seed(conn)
     conn.close()
-    print(f"Seeded {DB_PATH} with fake employees, customers, and login users.")
+    print(f"Seeded {DB_CONFIG['dbname']}@{DB_CONFIG['host']}:{DB_CONFIG['port']} with fake employees, customers, and login users.")
     print("Login users: admin/admin123, hr_manager/hrpass2026, analyst/analyst!1")

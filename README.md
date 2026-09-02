@@ -21,7 +21,7 @@ This project is part of a broader home detection lab focused on blue-team / dete
    Nginx + ModSecurity + OWASP CRS   (WSL2, Ubuntu)
                     │  proxy_pass
                     ▼
-   Meridian Corp — Flask + SQLite app (WSL2)
+   Meridian Corp — Flask + PostgreSQL app (WSL2)
    (fake internal HR/SaaS panel: employees, customers, login)
                     │
         ┌───────────┴───────────┐
@@ -38,7 +38,7 @@ This project is part of a broader home detection lab focused on blue-team / dete
 ```
 
 - **WAF**: Nginx + ModSecurity 3.x, OWASP Core Rule Set 4.30.0-dev, running in WSL2 on the same host as the rest of the lab.
-- **Target application**: Meridian Corp — a single-file Flask + SQLite app simulating an internal HR/SaaS panel (employee records, customer accounts, login). Seeded with synthetic data only. Contains four intentional vulnerabilities (SQLi, stored XSS, IDOR, weak auth) so attack traffic has real sinks to hit instead of an empty page.
+- **Target application**: Meridian Corp — a single-file Flask + PostgreSQL app simulating an internal HR/SaaS panel (employee records, customer accounts, login). Seeded with synthetic data only. Contains four intentional vulnerabilities (SQLi, stored XSS, IDOR, weak auth) so attack traffic has real sinks to hit instead of an empty page.
 - **Log pipeline**: Splunk Universal Forwarder (WSL2) → Splunk Enterprise (native Windows host) over the standard S2S port (9997). Two indexes: `web_modsec` (WAF audit log) and `web_app_security` (app-level auth/access events the WAF can't see).
 - **Traffic generation**: a Python script simulating a mix of normal browsing traffic and periodic attacker bursts (SQLi, XSS, LFI, RCE, SSRF) against the target, and a separate session-aware coverage script that logs in and tests each vulnerability class directly.
 
@@ -84,7 +84,7 @@ This project is part of a broader home detection lab focused on blue-team / dete
 
 ## Tools used
 
-Nginx, ModSecurity 3.x, OWASP Core Rule Set, Flask, SQLite, Splunk Enterprise, Splunk Universal Forwarder, WSL2, Python (`requests`), Kali Linux.
+Nginx, ModSecurity 3.x, OWASP Core Rule Set, Flask, PostgreSQL, Splunk Enterprise, Splunk Universal Forwarder, WSL2, Python (`requests`), Kali Linux.
 
 ---
 

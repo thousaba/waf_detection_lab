@@ -1,4 +1,4 @@
-# SQL Injection, Error-Based — What the WAF Was Actually Protecting
+# SQL Injection, Part 4: Error-Based — What the WAF Was Actually Protecting
 
 ## Why This Phase Is Different From the Others
 
